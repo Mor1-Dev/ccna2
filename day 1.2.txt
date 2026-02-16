@@ -1,0 +1,8 @@
+conf t
+monitor session 1 source interface fa0/3, fa0/5,fa0/7
+monitor session 1 destination interface fa0/1, fa0/9
+end
+
+conf t 
+no monitor session 1
+end
