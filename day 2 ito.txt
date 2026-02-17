@@ -1,0 +1,136 @@
+   2r_ 	binary lenghth
+2r4 = 2x2x2x2 = 16 = 1 00000 = 5 bits
+
+8b
+4b
+11b
+10b
+12b
+2
+9b
+10b
+4b
+8b
+13b
+7b
+14b
+5b
+
+
+subnit
+
+10.0.0./8- 16m
+rivancsi method "
+c:11b
+S:/32-11= /21
+i:8i3rdhiwa=
+network a
+10.0.8.0/21
+last : 10.0.8.1
+first : 10.0.15.255
+10.0.16.0/21
+
+C: 10 BIT
+S: 32- /10 =/22
+ipasoksi 4sa3rdhiwa
+
+10.0.4.0/22
+10.0.7.255
+10.0.8.0/22
+
+4500
+
+C: 13
+S: 32- 13 = 19
+ipasok32sa3rd
+10.0.32.0/19
+10.0.32.1
+10.0.63.255
+
+357
+
+C :6
+ 32-6 =26 
+ipasok64sa4nd
+
+10.0.0.64/26
+10.0.0.65
+10.0.0.127
+10.0.0.128
+
+358 pcs:
+C:9b
+S:9-32 /23/
+I:ipasoksi2isa3rd
+10.0.2.0/23
+10.0.2.1
+10.0.3.255
+10.0.4.0/23
+
+210
+C:8b
+S:8-32 - 24
+Ipasok1isa3rd
+10.0.1.0/24
+10.0.1.1
+10.0.2.0/24
+10.0.1.255
+
+
+172.20.70/26
+172.20.71.1
+172.20.71.255
+172.20.
+
+12
+32=12 
+2500
+
+10.0.16.0/20
+10.0.16.1
+10.0.31.255
+
+
+design a network using 10.0.0.0/8 to max fully utilize for 64 offices
+
+Cai method
+convert 
+add 
+ipasok
+
+convert 2r_
+convert 2r6 = 64 p6
+addto/orig 8+6 /14
+ipasok 4isa2nd: 
+1stoffice:10.4.0.0/12
+2ndoffice 10.8.0.0/14
+3rd office 10.12.0/14
+4th office 10.16.0/14
+5th office 10.20.0/14
+
+
+ex2.
+convert 2r4 = 16, p4
+addto orig 8+4 /12
+ipasok 16isa2nd :
+
+1st office 10.16.0.0/12
+2nd office 10.32.0.0/12
+3rd office 10.64.0.0/12
+4th office 10.128.0.0/12
+5th office 10.256.0/12
+
+ex3 
+convert 2r3 = 8 pr3
+addto orig 8+3 = 11
+ipasok32isa 2nd 
+
+1st office 10.32.0.0/11
+2nd office 10.64.0.0/11
+3rd office 10.128.0.0/11
+4th office 10.256.0.0/11
+5th office 10.1024.0.0/11
+
+
+
+
