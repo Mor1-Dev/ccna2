@@ -1,0 +1,215 @@
+config T
+ip route 0.0.0.0  0.0.0.0 10.2.1.1 1
+ip route 0.0.0.0  0.0.0.0 10.2.1.2 5
+!floating Static Routes
+do sh ip route static
+
+day 2:
+p1:
+config T
+ip route 0.0.0.0  0.0.0.0 10.2.1.1 5
+ip route 0.0.0.0  0.0.0.0 10.2.1.2 1
+!floating Static Routes
+do sh ip route static
+
+note
+r4 
+config t 
+router eigrp 100
+no auto-summary
+network 10.1.4.4 0.0.0.3
+network 10.1.4.8 0.0.0.3
+end
+sh ip eigrp neighbor
+
+sr : SH run
+ss : sh start 
+crs copy run sart
+scn sh cdp neighbor
+siib sh ip int brief
+sir sh ip route
+sip sh ip protocols
+spi sh power inline
+sien : sh ip eigrp neighbor
+sion sh ip ospf neighbor
+siod sh ip ospf database
+siet sh ip eigrp topology
+sibs sh ip bgp summary
+
+Down
+Init
+TWo-way
+Exstart
+Exchange
+Loading
+FULL
+
+router bgp
+neighbor 208.8.8.4 remote-as 45
+neighbor 207.7.7.2 remote-as 2
+neighbor 209.9.9.3 remote-as 3 
+network 207.7.7.0 mask 255.255.255.0
+network 208.8.8.0 mask 255.255.255.0
+network 209.9.9.0 mask 255.255.255.0
+network 10.1.1.0 mask 255.255.255.252
+
+
+Legend routing protocol    administrative distance
+
+C
+S
+D
+
+1.all zeroes on the left are ommited (walang kwent)
+2.subsequent zeroes became double colon
+3. colon 0 colon lang yung iba :0:
+4. left to right yung pag kakabasa ng device 
+
+A:c:::64
+::
+fe80:0:0:0:A:::f:64
+02:6500:0:3000:::64
+::1:128
+
+
+binary dec vs hex
+0000
+0001
+0010
+0011
+0100
+0101
+01
+
+/70 ( 5hextet, 4hexidecimal 2I)
+/53 
+
+
+ipv6 subnetting 
+
+128 constant 
+
+design an ipv6 for user 48
+C48 = 6bts
+s128 - 6 /128 (hextet) (hexdec) (i) 8th  3rd 4i
+I fec0:aabb:fafa:dada:0000:0000:0000:0000/122
+I fec0:aabb:fafa:dada:0000:0000:0000:0040/122
+ifec0:aabb:fafa:dada::40/122
+
+900 users
+C -10b
+S 128-10b = 118
+I 8 sa 8i
+2001:db80:0000:0000:0000:0000:0000:0800/118
+2001:db8::8/118
+
+network db80:0000:0000:0000:0000:0000:0400/118
+frstvld db80:0000:0000:0000:0000:0000:0400/118
+lastvalddb80:0000:0000:0000:0000:0000:07ff/118
+ntntwrk db80:0000:0000:0000:0000:0000:0800/118
+
+200 users
+C 98 8bits
+S 128-8b = 120 
+Ipasoksi8 sa4  2i
+2001:0db8:0000:0000:0000:0000:0000:0200/121
+network 2001:0db8:0000:0000:0000:0000:0000:0200/121
+frstvld 2001:0db8:0000:0000:0000:0000:0000:0801/121
+lstvld  2001:0db8:0000:0000:0000:0000:0000:00FF/121
+ntntwrk 2001:0db8:0000:0000:0000:0000:0000:0100/121
+
+i4
+conf t 
+ ipv6 unicast-routing
+ int e0/0 
+  no shutdown
+  ipv6 add 2001:db8:a0::81/121
+  end
+
+
+r4
+conf t 
+ ipv6 unicast-routing
+ int e0/0 
+  no shutdown
+  ipv6 add 2001:db8:0:20::1/60
+  end
+
+show ipv6 int br
+
+i3
+conf t 
+ ipv6 unicast-routing
+ int e0/0
+ ipv6 add 2001:db8:0:20::1/60
+  no shutdown
+  
+  end
+
+r3
+conf t 
+ ipv6 unicast-routing
+ int e0/0
+ ipv6 add 2001:0db8:0000: 0020: ffff:ffff:ffff:ffff:/60
+  no shutdown
+  
+  end
+
+2001:db8::/56 - cai method
+16
+C 2r4b
+A /56 + 4b /60 (4rd hexa 3thhexadec 1i)   
+I  2001:0db8:0000: 0000: 0000: 0000:0000: 0000:/60
+2001:0db8:0000: 0000: 0000: 0000:0000: 0000:/60
+2001:0db8:0000: 0010: 0000: 0000:0000: 0000:/60
+2001:0db8:0000: 0020: 0000: 0000:0000: 0000:/60
+2001:0db8:0000: 0030: 0000: 0000:0000: 0000:/60
+2001:db8:0:20::/60
+net 2001:0db8:0000: 0020: 0000: 0000:0000: 0000:/60
+fv 2001:db8:0:20::1/60
+lv 2001:0db8:0000: 0020: ffff:ffff:ffff:ffff:/60
+n :2001:0db8:0000: 0030: 0000: 0000:0000: 0000:/60
+first anycast (last 128 ips): 2001:0db8:0000: 0020: ffff:ffff:ffff:ff80:/60
+last anycast  lv 2001:0db8:0000: 0020: ffff:ffff:ffff:ff7f:/60
+
+ipv6 3 ways
+manual
+ipv6 using unique 64bit interface identifies gua eui
+dhcp6
+ipv6 and dhcp
+
+SLAA
+ip add autoconfig
+
+
+r3
+conf t 
+ ipv6 unicast-routing
+ int e0/0
+ ipv6 add 2001:0db8:0000: 0020: ffff:ffff:ffff:ffff:/60 eui-64
+  no shutdown
+  
+  end
+show ipv6 int brief
+
+i
+conf t 
+ ipv6 unicast-routing
+ int e0/0
+ ipv6 add 2001:db1:0::64 eui-64
+  no shut
+  end
+show ipv6 int brief
+
+conf t 
+ ipv6 unicast-routing
+ int e0/0
+ ipv6 add autoconfig
+  no shut
+  end
+show ipv6 int brief
+
+
+
+
+assignmen
