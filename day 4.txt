@@ -1,0 +1,346 @@
+day 4 notes 
+
+securecrt 
+wr - saving
+
+ex design an ipv6 network for 2400 users using the available ipv6 address space of 
+2001:db8:b:efe:1::/64
+
+C 2400 - 12b
+S 12-128 /116 (8th 1st 1i)
+I 2001 :0db8:0efe:0001:0000:0000:1000/116
+
+n 2001 :0db8:0efe:0001:0000:0000:0000:1000/116
+frstvld 2001 :0db8:0efe:0001:0000:1001:1001/116
+lsip 2001 :0db8:0efe:0001:0000:0000:0000:1fff/116
+ntnt 2001 :0db8:0efe:0001:0000:0000:2000/116
+
+ex design ipv6 network for 79 users using the available ipv6 address space of 2001:db8::/64
+C 7b 79 
+S 7b - 128 121 ( 8th 2nd 8i)
+I 2001 0db8 0000 0000 0000 0000 0000 0080 / 121
+
+n 2001:db8::80
+LV 2001:db8::ff
+nntwrk 2001:db8::100
+
+esign ipv6 network for 79 users using the available ipv6 address space of 2001:db8::/64
+
+3. subnet for 128 departments using 2001:db9:2:5::/55
+CAI mitod
+
+c:128 = 7b
+a:55 + 7 = 62 (4th 4th 4i)
+i:2001:0db9:0002:0004:0000:0000:0000:0000/55
+2001:0db9:0002:0008:0000:0000:0000:0000/55
+2001:0db9:0002:000C:0000:0000:0000:0000/55
+
+
+
+day 4 na mibombaklat
+
+7 app,ip,rtp
+
+6.codec, g711, g729
+
+5.rtp
+
+4.tftp sccp sip
+
+3.dhcp ip add
+
+2.svi mac add
+
+1.poe, 802.3af, 802.3atm, 802.3bt 
+
+voltage
+interface
+transmission
+
+rj45 , rj111 sfp module mght be kasama sa exam yung mga pins
+
+electric -(utp cable)
+Laser (fbr otic)
+rf (wireless)
+
+ncpa.cpl - 
+
+CSMA
+
+crc error meaning - physical wrong 
+
+ 0817.3510.a101
+
+how to configure ssh (lab to)
+
+!@core baba
+conf t
+ ipdomain name ccna.com
+ crypto key generate rsa modulus 2048 label key
+ ip ssh rsa keypair-name key
+ ip ssh version 2
+ !
+ line vty 0 14
+ login local
+ exit
+username admin priv 15 secret pass
+end
+
+ito ay configuration ng 
+internet
+UTM-PH
+NetAdapters   : NAT
+NetAdapters 2 :VMNET2
+NetAdapters 3 :VMNET3
+NetAdapters 4 :BRIDGED
+
+UTM-PH
+NetAdapters   : NAT
+NetAdapters 2 :VMNET2
+NetAdapters 3 :VMNET4
+
+Netops - PH
+VMNET 1
+BLDG-JP
+VMNet4
+
+configure area on all routers with the ff
+
+-all routers belong to area 2 
+use ospf process 5 
+assign each routers loopback 0 as their router id
+the link and r2 and r3 mst be to point to point
+r1 mst have the lowest priority on its e0/0 e0/1 interfaces
+advrtise all connected routes
+
+configs for r1 r2 r3 
+
+firwall
+1.traffic filtering (ACL, ZBF)
+2.transport security (vpn. DMVPN, ZTNA)
+3.threat prevention (NGFW)
+4.Network Segmentation(NAT, Porxy, DMZ)
+5.Monitoring Logging, and Alerts)
+
+t1 will prevent traffic only vlan 100
+o
+
+
+66
+
+66.254.114.238
+66.254.114.79
+66.254.114.41
+66.254.114.234
+104.21.5.229
+103.224.182.211
+172.237.146.38
+208.77.20.35
+
+66.254.114.0 0.0.0.255
+host 104.21.5.229 
+host 103.224.182.211
+host 172.237 146,38
+host 208.77.20.35
+
+config t
+ no ip access-list standard NOPORN
+ ip access-list standard NOPORN
+  deny 66.254.114.0 0.0.0.255
+  deny host 104.21.5.229 
+  deny host 103.224.182.211
+  deny host 172.237 146,38
+  deny host 208.77.20.35  log
+  permit any 
+ int gi 1
+  ip access-group NOPORN in
+  end
+show ip access-list 	int g1
+
+conf t
+ int gi 1
+  no ip access-group NOPORN in
+  end
+
+
+
+
+162.159.0.0 
+172.67.0.0
+76.223.0.0
+104.21.0.0
+104.21.0.0
+104.21.0.0
+
+
+config t
+ no ip access-list standard NOTRRNT
+ ip access-list standard NOTRRNT
+  deny 104.21.0.0 0.0.255.255
+  deny host 172.67.0.0 0.0.255.255
+  deny host 76.223.0.0 0.0.255.255
+  deny host 104.26.0.0 0.0.255.255
+  permit any 
+ int gi 1
+  ip access-group NOTRRNTin
+  end
+
+show ip access-list 	
+int g1
+
+conf t
+ int gi 1
+  no ip access-group NOTRRNT in
+  end
+
+
+208.8.8.11
+
+
+
+
+config t
+ ip host bet11.com 208.8.8.11
+ service finger
+ service tcp-small-servers
+ service udp-small-servers
+ ip dns server
+ ip http server
+ ip http secure-server
+ telephony-service
+  no auto-reg-ephone
+  max-ephones 5
+  max-dn 20
+  ip source-address 208.8.8.11 port 2000
+  exit
+ voice service voip
+  allow-connections h323 to sip
+          
+  allow-connections sip to h323
+  allow-connections sip to sip
+  supplementary-service h450.12
+ sip
+   bind control source-interface g4
+   bind media source-interface g4
+   registrar server expires max 600 min 60
+ voice register global
+  mode cme
+  source-address 208.8.8.11 port 5060
+  max-dn 12
+  max-pool 12
+  authenticate register
+  create profile sync syncinfo.xml
+  end
+
+t4 bet11.com ssh ping sip sccp dns
+
+config t
+ no ip access-list extended FWP10
+ ip access-list extended FWP10
+  permit tcp any host bet11.com eq 22 log
+  permit icmp any host bet11.com log
+  permit tcp any host bet11.com eq 5060 log
+  permit tcp any host bet11.com eq 2000 log
+  permit tcp any host bet11.com eq 53 log
+exit
+ !
+ int gi 1
+  ip access-group FWP10 in
+  end
+show ip access-list int g1
+
+
+conf t
+ int g1
+  no ip access-group FWP10 in
+  end\
+
+task 5
+bet11.com open the ff port
+telnet,ftp smtp mysql http https
+
+
+config t
+ no ip access-list extended FWP10
+ ip access-list extended FWP10
+  permit tcp any host bet11.com eq 23 log
+  permit tcp any host bet11.com eq 20 log
+  permit tcp any host bet11.com eq 25 log
+  permit tcp any host bet11.com eq 3306 log
+  permit tcp any host bet11.com eq 80 log
+  permit tcp any host bet11.com eq 443 log
+exit
+ !
+ int gi 1
+  ip access-group FWP10 in
+  end
+show ip access-list int g1
+
+
+| Port       | No.  | 
+| ---        | ---  |
+| SIP        |      |
+| SSH        |      |
+| DNS        |      |
+| SUBMISSION |      |
+| HTTPS      |      |
+| SMTPS      |      |
+| IMAPS      |      |
+| POP3S      |      |
+| SNMP       |      |
+
+
+
+
+config t
+ no ip access-list extended FWP10
+ ip access-list extended FWP10
+  permit udp any host bet11.com eq 5060 log
+  permit tcp any host bet11.com eq 22 log
+  permit tcp any host bet11.com eq 443 log
+  permit tcp any host bet11.com eq 53 log
+  permit tcp any host bet11.com eq 587 log
+  permit tcp any host bet11.com eq 993 log
+  permit tcp any host bet11.com eq 995 log
+  permit tcp any host bet11.com eq 465 log
+  permit tcp any host bet11.com eq 444 log
+exit
+ !
+ config t
+ int gi 1
+ no ip access-group FWP10 in
+  end
+show ip access-list int g1
+
+
+
+@utm-ph
+conf t 
+ int g4
+ ip nat inside
+ no ip nat inside source static tcp  10.91.1.4  23  208.8.8.100  2323
+ ip nat inside source static tcp  10.91.1.4  23  208.8.8.100  2000
+  ip nat inside source static tcp  10.91.100.8  23  208.8.8.99  2000
+end
+
+conf t
+ ip nat inside source static tcp  10.91.1.4  23  200.0.0.91  4023
+
+conf t
+ ip nat inside source static tcp  10.91.100.8 23  200.0.0.91 6967
+ ip nat inside source static tcp  10.91.1.6  22 200.0.0.91 6967
+ end
+ !
+
+conf t 
+no ip route 0.0.0.0 0.0.0.0 208.8.8.2
+
+
+keykymo
+
+
+!
+conf t 
+ip ssh server algorithm authentication publickey
+no ip ssh server algorithm authentication password
+no ip ssh server algorithm authentication keyboard
